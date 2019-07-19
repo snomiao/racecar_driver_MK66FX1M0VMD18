@@ -1,0 +1,46 @@
+芯片：K66
+                   tvs 抑制浪涌的     SMAJ5.0 一般3.3v用这个
+                   DGND的是数字地，AGND的是模拟地
+	  用0欧姆电阻连接。
+                 作用：0欧电阻相当于很窄的电流通路，能够有效地限制环路电流，使噪声得到抑制。	
+摄像头：Y0-Y7	----	B0-B7
+	SDA	----	A25
+	SCL	----	A26
+	PCLK	----	A27
+	HREF	----	A28
+	VSYNC	----	A29
+
+LCD屏：	D0-D7	----	C0-C7
+	UP	----	D10
+	LEFT	----	D11
+	RIGHT	----	D12
+	SELECT	----	D13
+	DOWN	----	D14
+	WR	----	C9
+	RD	----	C10
+	CS	----	C11
+	RS	----	C12
+	RST	----	C13
+
+蓝牙：	TXD	----	E24	
+	RXD	----	E25
+3520:25 2018/3/31
+
+
+LED         PTE27 \PTA5\7\9\8
+
+按键         S1--PTB18  S2--PTB16  S3--PTB10  S4--PTB9    
+
+编码器：   左	----	A10	(FTM2_QDPHA)
+			A11	(FTM2_QDPHB)
+	右	----	A12	(FTM1_QDPHA) 脉冲
+			A13	(FTM1_QDPHB) 方向
+
+舵机：		----	任意IO口		（E7）
+
+电机：	左	----	A6	(FTM0_CH3)
+	右	----	E5	(FTM3_CH0)
+               使能           ---           E3
+
+红外	任意IO口 D3 D1 D0 C19 C15
+//不能用的引脚口	B20	B21	B22	B23
