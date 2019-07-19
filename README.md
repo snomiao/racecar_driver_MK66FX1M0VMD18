@@ -1,0 +1,12 @@
+# racecar
+
+slave computer
+
+## wires
+
+A11(PWM_OUT) - SG995_SIGNAL
+A10(PWM_OUT) - MOTOR_SIGNAL
+A8(FTM_IN) - ENCODER_A
+A9(FTM_IN) - ENCODER_B
+E24(RX) - SERIAL_TX
+E24(TX) - SERIAL_RX

@@ -12,7 +12,16 @@ int flag_print_speed_ctl = 1;
 int flag_print_parsing = 0;
 int flag_print_uart4 = 0;
 
+// middle signal at 0.15ms in 20ms with TowerPro MG995
+// ref: https://components101.com/motors/mg995-servo-motor
+// PWM:
+// freq: 50
+// left: 0.5ms in 20ms duty
+// middle: 1.5ms in 20ms duty
+// right: 2.5ms in 20ms duty
 float v_servo = 7.5;
+
+// middle signal at 0.15ms in 20ms
 float v_motor = 7.5;
 
 extern void UART4_IRQHandler(); //串口1 中断接收函数
@@ -20,7 +29,7 @@ extern void UART4_IRQHandler(); //串口1 中断接收函数
 // float map_float(float x, float in_min, float in_max, float out_min, float out_max)
 // {
 //     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-// }
+// }k
 
 long map_long(long x, long in_min, long in_max, long out_min, long out_max)
 {
@@ -42,30 +51,30 @@ long map_long(long x, long in_min, long in_max, long out_min, long out_max)
 // reply
 void reply_command(void)
 {
-	uint8 tmp=0,sum=0;
-	uart_putchar(UART4, 0xAA);
-    
+    uint8 tmp = 0, sum = 0;
+    uart_putchar(UART4, 0xAA);
+
     uint16 cmd_motor = (uint16)v_motor * 200;
     uint16 cmd_servo = (uint16)v_servo * 200;
 
-	tmp=cmd_motor>>0;
-	sum=tmp;
-	uart_putchar(UART4, tmp);
+    tmp = cmd_motor >> 0;
+    sum = tmp;
+    uart_putchar(UART4, tmp);
 
-	tmp=cmd_motor>>8;
-	sum+=tmp;
-	uart_putchar(UART4, tmp);
+    tmp = cmd_motor >> 8;
+    sum += tmp;
+    uart_putchar(UART4, tmp);
 
-	tmp=cmd_servo>>0;
-	sum+=tmp;
-	uart_putchar(UART4, tmp);
+    tmp = cmd_servo >> 0;
+    sum += tmp;
+    uart_putchar(UART4, tmp);
 
-	tmp=cmd_servo>>8;
-	sum+=tmp;
-	uart_putchar(UART4, tmp);
+    tmp = cmd_servo >> 8;
+    sum += tmp;
+    uart_putchar(UART4, tmp);
 
-	uart_putchar(UART4, sum);
-	uart_putchar(UART4, 0x55);
+    uart_putchar(UART4, sum);
+    uart_putchar(UART4, 0x55);
 }
 
 void Parse_Command(void)
@@ -100,21 +109,25 @@ void Parse_Command(void)
     if (tail != 0x55)
         return;
 
-    if(flag_print_speed_ctl) printf("speed_ctl: ");
+    if (flag_print_speed_ctl)
+        printf("speed_ctl: ");
     if (500 <= cmd_servo && cmd_servo <= 2500)
     {
         v_servo = (float)cmd_servo / (float)200;
         ftm_pwm_duty(FTM2, FTM_CH1, v_servo);
-        if(flag_print_speed_ctl) printf("servo: %d\t", cmd_servo);
+        if (flag_print_speed_ctl)
+            printf("servo: %d\t", cmd_servo);
     } // TPM2C0V=2*cmd_servo;	//设置舵机PWM
 
     if (500 <= cmd_motor && cmd_motor <= 2500)
     {
         v_motor = (float)cmd_motor / (float)200;
         ftm_pwm_duty(FTM2, FTM_CH0, v_motor);
-        if(flag_print_speed_ctl) printf("motor: %d\t", cmd_motor);
+        if (flag_print_speed_ctl)
+            printf("motor: %d\t", cmd_motor);
     }
-    if(flag_print_speed_ctl) printf("\n");
+    if (flag_print_speed_ctl)
+        printf("\n");
     // delay(1);
     // SCI_Reply();
 }
@@ -190,10 +203,10 @@ void init_all()
     set_vector_handler(PIT2_VECTORn, PIT2_IRQHandler2);
     enable_irq(PIT2_IRQn);
 
-    // // 舵机
+    // 舵机
     ftm_pwm_init(FTM2, FTM_CH1, 50, 50, FTM2_CH1_PIN);
 
-    // // 电调
+    // 电调
     ftm_pwm_init(FTM2, FTM_CH0, 50, 50, FTM2_CH0_PIN);
 
     // 编码器

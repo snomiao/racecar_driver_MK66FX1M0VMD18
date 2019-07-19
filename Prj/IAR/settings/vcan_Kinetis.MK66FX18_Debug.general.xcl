@@ -2,7 +2,7 @@
 
 "C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.2\arm\bin\armJET.dll" 
 
-"C:\Users\snomiao\Desktop\racecar_driver\Prj\IAR\MK66FX18_Debug\Exe\vcan_Kinetis.out" 
+"C:\Users\snomiao\Desktop\racecar_driver_MK66FX1M0VMD18\Prj\IAR\MK66FX18_Debug\Exe\vcan_Kinetis.out" 
 
 --plugin="C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.2\arm\bin\armbat.dll" 
 
@@ -10,7 +10,7 @@
 
 --device_macro="C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.2\arm\config\debugger\NXP\K6x_Trace.dmac" 
 
---flash_loader="C:\Users\snomiao\Desktop\racecar_driver\Prj\IAR\config files\vcan_K66.board" 
+--flash_loader="C:\Users\snomiao\Desktop\racecar_driver_MK66FX1M0VMD18\Prj\IAR\config files\vcan_K66.board" 
 
 
 

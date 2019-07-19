@@ -815,7 +815,7 @@
             <IarPane-34095>
                 <expressions>
                     <item>v_motor</item>
-                    <item></item>
+                    <item />
                 </expressions>
                 <col-names>
                     <item>Expression</item>
