@@ -20,8 +20,6 @@ int flag_print_uart4 = 0;
 // middle: 1.5ms in 20ms duty
 // right: 2.5ms in 20ms duty
 float v_servo = 7.5;
-
-// middle signal at 0.15ms in 20ms
 float v_motor = 7.5;
 
 extern void UART4_IRQHandler(); //串口1 中断接收函数
