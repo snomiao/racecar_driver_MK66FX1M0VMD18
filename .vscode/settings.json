@@ -1,3 +1,7 @@
 {
-    "files.autoGuessEncoding": true
+    "files.autoGuessEncoding": true,
+    "files.associations": {
+        "include.h": "c",
+        "ff.h": "c"
+    }
 }

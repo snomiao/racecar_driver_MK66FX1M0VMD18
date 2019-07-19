@@ -22,7 +22,7 @@ int flag_print_uart4 = 0;
 float v_servo = 7.5;
 float v_motor = 7.5;
 
-extern void UART4_IRQHandler(); //串口1 中断接收函数
+extern void UART4_IRQHandler(); //串口1 中断接收函数, 不知为何不起作用
 
 // float map_float(float x, float in_min, float in_max, float out_min, float out_max)
 // {
@@ -33,18 +33,6 @@ long map_long(long x, long in_min, long in_max, long out_min, long out_max)
 {
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
-
-// void update_servo(float duty)
-// {
-//     //调整舵机占空比
-//     float duty = map_float(range, 0, 1, 0, 17.48);
-//     ftm_pwm_duty(FTM2, FTM_CH1, duty);
-// }
-// void update_motor(float duty){
-//     //调整电调占空比
-//     float duty = map_float(range, 0, 10000, 0, 100);
-//     ftm_pwm_duty(FTM1, FTM_CH0, duty);
-// }
 
 // reply
 void reply_command(void)
@@ -130,17 +118,18 @@ void Parse_Command(void)
     // SCI_Reply();
 }
 
+// 不知为何不起作用
 void UART4_IRQHandler(void)
 {
     // uint8 ch;
 
-    DisableInterrupts; //关总中断
+    // DisableInterrupts; //关总中断
 
-    char ch;
-    uart_querychar(UART4, &ch);
-    printf("ch: %c\n", ch);
+    // char ch;
+    // uart_querychar(UART4, &ch);
+    // printf("ch: %c\n", ch);
 
-    EnableInterrupts; //开总中断
+    // EnableInterrupts; //开总中断
 }
 
 unsigned int fps = 0;
